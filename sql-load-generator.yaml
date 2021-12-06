@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sql-load-generator
+  labels:
+    app: sql-load-generator
+spec:
+  terminationGracePeriodSeconds: 60
+  containers:
+  - name: sql-load-generator
+    image: uditgaurav/mssql:load
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "250m"
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    env:
+      - name: SERVER
+        value: "test-chaos-server.database.windows.net"
+      - name: DB_NAME
+        value: "test123"
+      - name: USERNAME
+        value: ""
+      - name: PASSWORD
+        value: ""
+      - name: PORT
+        value: "1433"
+      - name: TABLE_NAME
+        value: "load"
